@@ -1,0 +1,15 @@
+user_id,name,email,role,dev_password
+U001,Dr. A. Dike,adike@example.com,admin,Admin@123
+U002,Prof. M. Abdullahi,mabdullahi@example.com,admin,Admin@123
+U003,Dr. S. Okonkwo,sokonkwo@example.com,admin,Admin@123
+U004,Dr. H. Garba,hgarba@example.com,admin,Admin@123
+U005,Dr. B. Yakubu,yakubu5@example.com,lecturer,Lecturer@123
+U006,Mr. T. Ogunleye,ogunleye6@example.com,lecturer,Lecturer@123
+U007,Mrs. C. Nwankwo,nwankwo7@example.com,lecturer,Lecturer@123
+U008,Dr. J. Danladi,danladi8@example.com,lecturer,Lecturer@123
+U009,Mr. K. Lawal,lawal9@example.com,lecturer,Lecturer@123
+U010,Dr. R. Adeniyi,adeniyi10@example.com,lecturer,Lecturer@123
+U011,Mrs. F. Suleiman,suleiman11@example.com,lecturer,Lecturer@123
+U012,Mr. P. Okeke,okeke12@example.com,lecturer,Lecturer@123
+U013,Dr. N. Tanko,tanko13@example.com,lecturer,Lecturer@123
+U014,Mr. D. Audu,audu14@example.com,lecturer,Lecturer@123

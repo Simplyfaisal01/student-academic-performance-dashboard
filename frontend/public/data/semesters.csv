@@ -1,0 +1,5 @@
+semester_id,session,name,start_date,end_date,is_current
+1,2023/2024,First Semester,2023-10-02,2024-02-09,0
+2,2023/2024,Second Semester,2024-03-04,2024-07-12,0
+3,2024/2025,First Semester,2024-10-07,2025-02-14,0
+4,2024/2025,Second Semester,2025-03-10,2025-07-18,1

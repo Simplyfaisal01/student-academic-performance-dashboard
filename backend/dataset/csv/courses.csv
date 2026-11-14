@@ -1,0 +1,41 @@
+course_id,code,title,credit_units,level,semester_name,lecturer_id
+1,CSC101,Introduction to Computer Science,3,100,First Semester,U013
+2,CSC103,Programming Fundamentals,3,100,First Semester,U006
+3,MTH101,General Mathematics I,3,100,First Semester,U012
+4,PHY101,General Physics I,3,100,First Semester,U007
+5,GST101,Use of English I,2,100,First Semester,U013
+6,CSC102,Computer Applications,3,100,Second Semester,U005
+7,CSC104,Introduction to Problem Solving,3,100,Second Semester,U010
+8,MTH102,General Mathematics II,3,100,Second Semester,U011
+9,PHY102,General Physics II,3,100,Second Semester,U014
+10,GST102,Logic and Philosophy,2,100,Second Semester,U008
+11,CSC201,Computer Programming I,3,200,First Semester,U006
+12,CSC203,Discrete Mathematics,3,200,First Semester,U011
+13,CSC205,Digital Logic Design,3,200,First Semester,U011
+14,MTH201,Linear Algebra,3,200,First Semester,U006
+15,STA201,Statistics for Computing,2,200,First Semester,U005
+16,CSC202,Computer Programming II,3,200,Second Semester,U006
+17,CSC204,Computer Architecture,3,200,Second Semester,U008
+18,CSC206,Introduction to Databases,3,200,Second Semester,U011
+19,MTH202,Numerical Methods,3,200,Second Semester,U006
+20,GST201,Entrepreneurship Studies,2,200,Second Semester,U011
+21,CSC301,Data Structures and Algorithms,3,300,First Semester,U005
+22,CSC303,Operating Systems,3,300,First Semester,U014
+23,CSC305,Database Management Systems,3,300,First Semester,U005
+24,CSC307,Object-Oriented Programming,3,300,First Semester,U013
+25,CSC309,Computer Networks,2,300,First Semester,U013
+26,CSC302,Software Engineering,3,300,Second Semester,U006
+27,CSC304,Theory of Computation,3,300,Second Semester,U008
+28,CSC306,Web Application Development,3,300,Second Semester,U008
+29,CSC308,Algorithm Analysis,3,300,Second Semester,U005
+30,CSC310,Systems Analysis and Design,2,300,Second Semester,U008
+31,CSC401,Artificial Intelligence,3,400,First Semester,U011
+32,CSC403,Compiler Construction,3,400,First Semester,U012
+33,CSC405,Computer Security,3,400,First Semester,U010
+34,CSC407,Research Methodology,2,400,First Semester,U013
+35,CSC409,Mobile Application Development,3,400,First Semester,U005
+36,CSC402,Machine Learning,3,400,Second Semester,U014
+37,CSC404,Distributed Systems,3,400,Second Semester,U006
+38,CSC406,Cloud Computing,3,400,Second Semester,U013
+39,CSC408,Professional Ethics in Computing,2,400,Second Semester,U008
+40,CSC499,Final Year Project,6,400,Second Semester,U008
