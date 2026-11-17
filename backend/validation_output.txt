@@ -1,0 +1,40 @@
+================================================================================
+🎓 ACADEMIC PROBATION MONITORING ENGINE VALIDATION
+Timestamp: 2026-11-17 02:00:01
+Answer Key: C:\Users\USER\student_performance_dashboard\backend\data\expected_probation_results.csv
+================================================================================
+
+[+] Loaded ground-truth answer key: 349 records across semesters.
+
+[+] Flag --clear supplied. Purging existing records...
+    ✓ Removed 37 notifications and 37 probation cases.
+
+[+] Executing probation engine on all ground-truth records...
+    ✓ Evaluated 349 student-semester instances through engine.
+    ✓ Total probation cases created in database: 37
+
+================================================================================
+📊 PER-SEMESTER VALIDATION SUMMARY (Table 4.5)
+================================================================================
+  Semester  Records  Expected Flagged  Engine Flagged  Mismatches Accuracy
+Semester 1      103                12              12           0  100.00%
+Semester 2      103                 7               7           0  100.00%
+Semester 3      143                18              18           0  100.00%
+     TOTAL      349                37              37           0  100.00%
+
+================================================================================
+🔍 CLASSIFICATION MISMATCH DETAILS
+================================================================================
+✅ PERFECT MATCH: 0 classification mismatches across all 349 records!
+
+================================================================================
+📝 REASONS AGREEMENT ANALYSIS (For Flagged Students)
+================================================================================
+Total agreed flagged cases analyzed: 37
+  • GPA Reason Agreement:           37/37 (100.0%)
+  • Failed Courses Reason Agreement:37/37 (100.0%)
+  • Full Syntactic Reason Match:    37/37 (100.0%)
+
+================================================================================
+Validation finished. Console output saved to: C:\Users\USER\student_performance_dashboard\backend\validation_output.txt
+================================================================================

@@ -56,7 +56,10 @@ export const AuthProvider = ({ children }) => {
         const response = await api.post('/auth/login', { email, password });
         if (response.data && response.data.access_token) {
           const authToken = response.data.access_token;
-          const authUser = response.data.user;
+          const authUser = {
+            ...response.data.user,
+            originalRole: response.data.user.role,
+          };
           setToken(authToken);
           setUser(authUser);
           localStorage.setItem('acadtrack_token', authToken);
@@ -91,12 +94,16 @@ export const AuthProvider = ({ children }) => {
       // Both email and password correct — issue offline mock token.
       // Strip the internal _password field before storing.
       const { _password, ...safeUser } = matchedUser;
-      const mockToken = 'mock_jwt_' + btoa(JSON.stringify(safeUser));
-      setUser(safeUser);
+      const userWithRole = {
+        ...safeUser,
+        originalRole: safeUser.role,
+      };
+      const mockToken = 'mock_jwt_' + btoa(JSON.stringify(userWithRole));
+      setUser(userWithRole);
       setToken(mockToken);
       localStorage.setItem('acadtrack_token', mockToken);
-      localStorage.setItem('acadtrack_user', JSON.stringify(safeUser));
-      return { success: true, user: safeUser };
+      localStorage.setItem('acadtrack_user', JSON.stringify(userWithRole));
+      return { success: true, user: userWithRole };
 
       // ── NO generic fallback — any unrecognised email is rejected above ────
     } finally {
@@ -111,9 +118,18 @@ export const AuthProvider = ({ children }) => {
     localStorage.removeItem('acadtrack_user');
   };
 
+  const baseAccountRole = user?.originalRole || user?.role;
+  const canSwitchRole = baseAccountRole === 'admin';
+
   const switchRole = (newRole) => {
     if (!user) return;
-    const updated = { ...user, role: newRole };
+    const baseRole = user.originalRole || user.role;
+    // Security constraint: Staff/lecturer accounts cannot switch to administrator
+    if (baseRole !== 'admin') {
+      console.warn('Unauthorized role switch attempt blocked: staff cannot switch to administrator');
+      return;
+    }
+    const updated = { ...user, role: newRole, originalRole: baseRole };
     setUser(updated);
     localStorage.setItem('acadtrack_user', JSON.stringify(updated));
   };
@@ -130,6 +146,7 @@ export const AuthProvider = ({ children }) => {
         isAuthenticated: !!user,
         isAdmin: user?.role === 'admin',
         isLecturer: user?.role === 'lecturer',
+        canSwitchRole,
         // Strip internal _password field before exposing to consumers
         DEMO_USERS: DEMO_USERS.map(({ _password, ...u }) => u),
       }}

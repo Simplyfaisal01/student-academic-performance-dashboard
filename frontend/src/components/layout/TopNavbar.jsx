@@ -14,7 +14,7 @@ import { useAuth } from '../../context/AuthContext';
 import { useData } from '../../context/DataContext';
 
 export const TopNavbar = ({ onToggleSidebar, title }) => {
-  const { user, logout, switchRole, isAdmin } = useAuth();
+  const { user, logout, switchRole, isAdmin, canSwitchRole } = useAuth();
   const {
     semesters,
     selectedSemesterId,
@@ -279,35 +279,37 @@ export const TopNavbar = ({ onToggleSidebar, title }) => {
                 </span>
               </div>
 
-              {/* Role switcher for testing */}
-              <div style={{ padding: '0.5rem 0', borderBottom: '1px solid var(--border-color)' }}>
-                <div style={{ fontSize: '0.6875rem', fontWeight: 700, color: 'var(--text-secondary)', padding: '0 0.5rem 0.25rem' }}>
-                  SWITCH ROLE (TESTING)
+              {/* Role preview: only available for Administrator accounts to preview Lecturer view */}
+              {canSwitchRole && (
+                <div style={{ padding: '0.5rem 0', borderBottom: '1px solid var(--border-color)' }}>
+                  <div style={{ fontSize: '0.6875rem', fontWeight: 700, color: 'var(--text-secondary)', padding: '0 0.5rem 0.25rem' }}>
+                    ROLE PREVIEW (ADMIN ONLY)
+                  </div>
+                  <button
+                    onClick={() => switchRole(isAdmin ? 'lecturer' : 'admin')}
+                    style={{
+                      width: '100%',
+                      padding: '0.45rem 0.5rem',
+                      textAlign: 'left',
+                      background: 'none',
+                      border: 'none',
+                      fontSize: '0.8125rem',
+                      fontWeight: 600,
+                      color: 'var(--text-primary)',
+                      cursor: 'pointer',
+                      display: 'flex',
+                      alignItems: 'center',
+                      gap: '0.5rem',
+                      borderRadius: '4px',
+                    }}
+                    onMouseEnter={(e) => (e.target.style.backgroundColor = '#F8FAFC')}
+                    onMouseLeave={(e) => (e.target.style.backgroundColor = 'transparent')}
+                  >
+                    <Shield size={14} color="var(--primary-green)" />
+                    {isAdmin ? 'Preview as Lecturer' : 'Switch back to Administrator'}
+                  </button>
                 </div>
-                <button
-                  onClick={() => switchRole(isAdmin ? 'lecturer' : 'admin')}
-                  style={{
-                    width: '100%',
-                    padding: '0.45rem 0.5rem',
-                    textAlign: 'left',
-                    background: 'none',
-                    border: 'none',
-                    fontSize: '0.8125rem',
-                    fontWeight: 600,
-                    color: 'var(--text-primary)',
-                    cursor: 'pointer',
-                    display: 'flex',
-                    alignItems: 'center',
-                    gap: '0.5rem',
-                    borderRadius: '4px',
-                  }}
-                  onMouseEnter={(e) => (e.target.style.backgroundColor = '#F8FAFC')}
-                  onMouseLeave={(e) => (e.target.style.backgroundColor = 'transparent')}
-                >
-                  <Shield size={14} color="var(--primary-green)" />
-                  Switch to {isAdmin ? 'Lecturer' : 'Administrator'}
-                </button>
-              </div>
+              )}
 
               <div style={{ paddingTop: '0.25rem' }}>
                 <button

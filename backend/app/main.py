@@ -25,10 +25,15 @@ app = FastAPI(
     docs_url=f"{settings.API_V1_STR}/docs",
 )
 
-# Allow the Vite dev server (port 5173) to call the API during development
+# Allow the Vite dev server and deployed frontend domains to call the API
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["http://localhost:5173", "http://localhost:3000", "https://curly-base-841f.abubakarfaisal393.workers.dev/"],
+    allow_origins=[
+        "http://localhost:5173",
+        "http://localhost:3000",
+        "http://127.0.0.1:5173",
+    ],
+    allow_origin_regex=r"https://.*",
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],

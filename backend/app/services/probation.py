@@ -48,6 +48,10 @@ def evaluate_probation(
     return is_flagged, "; ".join(reasons)
 
 
+# Direct alias for pure evaluation check
+should_flag = evaluate_probation
+
+
 # ── Database Sync Logic ───────────────────────────────────────────────────────
 
 def sync_student_probation_case(
