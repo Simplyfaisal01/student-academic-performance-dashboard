@@ -32,7 +32,7 @@ export const Layout = () => {
   };
 
   return (
-    <div style={{ display: 'flex', minHeight: '100vh', backgroundColor: 'var(--bg-main)', width: '100%', maxWidth: '100vw', overflowX: 'hidden' }}>
+    <div style={{ display: 'flex', minHeight: '100vh', backgroundColor: 'var(--bg-main)', width: '100%', maxWidth: '100vw', overflowX: 'hidden', alignItems: 'stretch' }}>
       {/* Collapsible Mobile & Desktop Sidebar */}
       <Sidebar isOpen={sidebarOpen} onClose={() => setSidebarOpen(false)} />
 
