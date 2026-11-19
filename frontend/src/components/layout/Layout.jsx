@@ -32,17 +32,17 @@ export const Layout = () => {
   };
 
   return (
-    <div style={{ display: 'flex', minHeight: '100vh', backgroundColor: 'var(--bg-main)' }}>
-      {/* Sidebar */}
+    <div style={{ display: 'flex', minHeight: '100vh', backgroundColor: 'var(--bg-main)', width: '100%', maxWidth: '100vw', overflowX: 'hidden' }}>
+      {/* Collapsible Mobile & Desktop Sidebar */}
       <Sidebar isOpen={sidebarOpen} onClose={() => setSidebarOpen(false)} />
 
       {/* Main Workspace Area */}
-      <div style={{ flex: 1, display: 'flex', flexDirection: 'column', minWidth: 0 }}>
+      <div style={{ flex: 1, display: 'flex', flexDirection: 'column', minWidth: 0, width: '100%', maxWidth: '100vw', overflowX: 'hidden' }}>
         <TopNavbar
           title={getPageTitle(location.pathname)}
           onToggleSidebar={() => setSidebarOpen(!sidebarOpen)}
         />
-        <main style={{ flex: 1, padding: '1.5rem', overflowY: 'auto' }}>
+        <main className="main-content-area" style={{ flex: 1, padding: '1.5rem', overflowY: 'auto', minWidth: 0, width: '100%' }}>
           <Outlet />
         </main>
       </div>
@@ -51,4 +51,3 @@ export const Layout = () => {
 };
 
 export default Layout;
-

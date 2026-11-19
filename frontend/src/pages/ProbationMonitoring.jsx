@@ -91,7 +91,7 @@ export const ProbationMonitoring = () => {
     <div style={{ display: 'flex', flexDirection: 'column', gap: '1.25rem' }}>
       {/* Top Banner with Threshold Reminder */}
       <div
-        className="card"
+        className="card action-header-stack"
         style={{
           backgroundColor: '#FFFFFF',
           borderLeft: '4px solid #DC2626',
@@ -104,7 +104,7 @@ export const ProbationMonitoring = () => {
       >
         <div>
           <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', marginBottom: '0.25rem' }}>
-            <ShieldAlert size={20} color="#DC2626" />
+            <ShieldAlert size={20} color="#DC2626" style={{ flexShrink: 0 }} />
             <h2 style={{ fontSize: '1.15rem', fontWeight: 800, color: 'var(--text-primary)' }}>
               Automated Academic Probation & Standing Monitor
             </h2>
@@ -124,6 +124,7 @@ export const ProbationMonitoring = () => {
               borderRadius: 'var(--radius-sm)',
               fontSize: '0.8125rem',
               fontWeight: 700,
+              whiteSpace: 'nowrap',
             }}
           >
             {flaggedEvaluations.length} Cases Under Review
@@ -138,12 +139,12 @@ export const ProbationMonitoring = () => {
           padding: '1rem',
           display: 'flex',
           alignItems: 'center',
-          gap: '1rem',
+          gap: '0.75rem',
           flexWrap: 'wrap',
         }}
       >
         {/* Search */}
-        <div style={{ flex: '1 1 240px', position: 'relative' }}>
+        <div style={{ flex: '1 1 240px', position: 'relative', minWidth: '180px' }}>
           <Search
             size={16}
             color="var(--text-muted)"
@@ -160,32 +161,32 @@ export const ProbationMonitoring = () => {
         </div>
 
         {/* Classification Filter */}
-        <div style={{ display: 'flex', alignItems: 'center', gap: '0.4rem' }}>
-          <span style={{ fontSize: '0.8125rem', fontWeight: 600, color: 'var(--text-secondary)' }}>
+        <div style={{ display: 'flex', alignItems: 'center', gap: '0.4rem', flex: '0 1 auto' }}>
+          <span style={{ fontSize: '0.8125rem', fontWeight: 600, color: 'var(--text-secondary)', whiteSpace: 'nowrap' }}>
             Status:
           </span>
           <select
             className="form-control"
-            style={{ width: 'auto' }}
+            style={{ width: 'auto', minWidth: '130px' }}
             value={statusFilter}
             onChange={(e) => setStatusFilter(e.target.value)}
           >
-            <option value="all">All Flagged (At Risk + Probation)</option>
+            <option value="all">All Flagged Cases</option>
             <option value="Probation">Probation Only</option>
             <option value="Critical Risk">Critical Risk Only</option>
-            <option value="At Risk">At Risk Only</option>
-            <option value="all_students">Show All Registered Students</option>
+            <option value="At Risk">At Risk Warning</option>
+            <option value="all_students">All Students in Session</option>
           </select>
         </div>
 
         {/* Level Filter */}
-        <div style={{ display: 'flex', alignItems: 'center', gap: '0.4rem' }}>
-          <span style={{ fontSize: '0.8125rem', fontWeight: 600, color: 'var(--text-secondary)' }}>
+        <div style={{ display: 'flex', alignItems: 'center', gap: '0.4rem', flex: '0 1 auto' }}>
+          <span style={{ fontSize: '0.8125rem', fontWeight: 600, color: 'var(--text-secondary)', whiteSpace: 'nowrap' }}>
             Level:
           </span>
           <select
             className="form-control"
-            style={{ width: 'auto' }}
+            style={{ width: 'auto', minWidth: '110px' }}
             value={levelFilter}
             onChange={(e) => setLevelFilter(e.target.value)}
           >
@@ -311,7 +312,7 @@ export const ProbationMonitoring = () => {
                 borderRadius: 'var(--radius-sm)',
                 border: '1px solid var(--border-color)',
                 display: 'grid',
-                gridTemplateColumns: 'repeat(auto-fit, minmax(180px, 1fr))',
+                gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 160px), 1fr))',
                 gap: '0.75rem',
               }}
             >
@@ -369,30 +370,32 @@ export const ProbationMonitoring = () => {
               <h4 style={{ fontSize: '0.875rem', fontWeight: 700, color: 'var(--text-primary)', marginBottom: '0.5rem' }}>
                 Course Scores in {selectedCase.semester_name}
               </h4>
-              <table style={{ width: '100%', fontSize: '0.8125rem', borderCollapse: 'collapse' }}>
-                <thead>
-                  <tr style={{ borderBottom: '1px solid var(--border-color)', color: 'var(--text-secondary)' }}>
-                    <th style={{ textAlign: 'left', padding: '0.35rem' }}>Course Code</th>
-                    <th style={{ textAlign: 'left', padding: '0.35rem' }}>Title</th>
-                    <th style={{ textAlign: 'center', padding: '0.35rem' }}>Units</th>
-                    <th style={{ textAlign: 'center', padding: '0.35rem' }}>Score</th>
-                    <th style={{ textAlign: 'center', padding: '0.35rem' }}>Grade</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {selectedCase.enrollments?.map((e) => (
-                    <tr key={e.enrollment_id} style={{ borderBottom: '1px solid var(--border-light)' }}>
-                      <td style={{ padding: '0.35rem', fontWeight: 700 }}>{e.course_code}</td>
-                      <td style={{ padding: '0.35rem' }}>{e.course_title}</td>
-                      <td style={{ padding: '0.35rem', textAlign: 'center' }}>{e.credit_units}</td>
-                      <td style={{ padding: '0.35rem', textAlign: 'center', fontWeight: 700 }}>{e.score}</td>
-                      <td style={{ padding: '0.35rem', textAlign: 'center', fontWeight: 800, color: e.grade === 'F' ? '#DC2626' : 'inherit' }}>
-                        {e.grade}
-                      </td>
+              <div className="data-table-container">
+                <table style={{ width: '100%', fontSize: '0.8125rem', borderCollapse: 'collapse' }}>
+                  <thead>
+                    <tr style={{ borderBottom: '1px solid var(--border-color)', color: 'var(--text-secondary)' }}>
+                      <th style={{ textAlign: 'left', padding: '0.35rem' }}>Course Code</th>
+                      <th style={{ textAlign: 'left', padding: '0.35rem' }}>Title</th>
+                      <th style={{ textAlign: 'center', padding: '0.35rem' }}>Units</th>
+                      <th style={{ textAlign: 'center', padding: '0.35rem' }}>Score</th>
+                      <th style={{ textAlign: 'center', padding: '0.35rem' }}>Grade</th>
                     </tr>
-                  ))}
-                </tbody>
-              </table>
+                  </thead>
+                  <tbody>
+                    {selectedCase.enrollments?.map((e) => (
+                      <tr key={e.enrollment_id} style={{ borderBottom: '1px solid var(--border-light)' }}>
+                        <td style={{ padding: '0.35rem', fontWeight: 700 }}>{e.course_code}</td>
+                        <td style={{ padding: '0.35rem' }}>{e.course_title}</td>
+                        <td style={{ padding: '0.35rem', textAlign: 'center' }}>{e.credit_units}</td>
+                        <td style={{ padding: '0.35rem', textAlign: 'center', fontWeight: 700 }}>{e.score}</td>
+                        <td style={{ padding: '0.35rem', textAlign: 'center', fontWeight: 800, color: e.grade === 'F' ? '#DC2626' : 'inherit' }}>
+                          {e.grade}
+                        </td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
             </div>
           </div>
         )}

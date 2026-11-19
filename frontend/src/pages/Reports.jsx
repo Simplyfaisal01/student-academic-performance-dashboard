@@ -113,7 +113,7 @@ export const Reports = () => {
     <div style={{ display: 'flex', flexDirection: 'column', gap: '1.25rem' }}>
       {/* Configuration & Generation Bar */}
       <div
-        className="card"
+        className="card action-header-stack"
         style={{
           display: 'flex',
           alignItems: 'center',
@@ -122,9 +122,9 @@ export const Reports = () => {
           gap: '1rem',
         }}
       >
-        <div style={{ display: 'flex', alignItems: 'center', gap: '1rem', flexWrap: 'wrap' }}>
+        <div style={{ display: 'flex', alignItems: 'center', gap: '1rem', flexWrap: 'wrap', width: '100%', maxWidth: '650px' }}>
           {/* Report Type Selector */}
-          <div>
+          <div style={{ flex: '1 1 200px' }}>
             <label className="form-label">Report Category</label>
             <select
               className="form-control"
@@ -140,7 +140,7 @@ export const Reports = () => {
 
           {/* Level Filter (if not individual) */}
           {reportType !== 'individual' && (
-            <div>
+            <div style={{ flex: '1 1 150px' }}>
               <label className="form-label">Target Level</label>
               <select
                 className="form-control"
@@ -158,7 +158,7 @@ export const Reports = () => {
 
           {/* Student Selector (if individual) */}
           {reportType === 'individual' && (
-            <div>
+            <div style={{ flex: '1 1 200px' }}>
               <label className="form-label">Select Student</label>
               <select
                 className="form-control"
@@ -176,7 +176,7 @@ export const Reports = () => {
         </div>
 
         {/* Action Buttons */}
-        <div style={{ display: 'flex', gap: '0.5rem', alignSelf: 'flex-end', flexWrap: 'wrap' }}>
+        <div className="action-buttons-wrap" style={{ display: 'flex', gap: '0.5rem', flexWrap: 'wrap' }}>
           <button className="btn btn-secondary" onClick={handleExportCSV}>
             <Download size={15} />
             Export CSV
@@ -194,10 +194,9 @@ export const Reports = () => {
 
       {/* Official Report Document Preview Canvas */}
       <div
-        className="card report-print-area"
+        className="card report-print-area report-preview-card"
         style={{
           backgroundColor: '#FFFFFF',
-          padding: '2.5rem',
           borderRadius: 'var(--radius-md)',
           boxShadow: 'var(--shadow-md)',
         }}
@@ -211,6 +210,8 @@ export const Reports = () => {
             display: 'flex',
             justifyContent: 'space-between',
             alignItems: 'flex-start',
+            flexWrap: 'wrap',
+            gap: '1rem',
           }}
         >
           <div>
@@ -272,48 +273,50 @@ export const Reports = () => {
         </div>
 
         {/* Report Table */}
-        <table style={{ width: '100%', borderCollapse: 'collapse', fontSize: '0.8125rem' }}>
-          <thead>
-            <tr style={{ backgroundColor: '#F8FAFC', borderBottom: '1px solid var(--border-color)' }}>
-              <th style={{ padding: '0.6rem', textAlign: 'left' }}>Matric No</th>
-              <th style={{ padding: '0.6rem', textAlign: 'left' }}>Student Name</th>
-              <th style={{ padding: '0.6rem', textAlign: 'center' }}>Level</th>
-              <th style={{ padding: '0.6rem', textAlign: 'center' }}>GPA</th>
-              <th style={{ padding: '0.6rem', textAlign: 'center' }}>Fails</th>
-              <th style={{ padding: '0.6rem', textAlign: 'left' }}>Academic Standing</th>
-              <th style={{ padding: '0.6rem', textAlign: 'left' }}>Diagnosis / Reason</th>
-            </tr>
-          </thead>
-          <tbody>
-            {reportData.length === 0 ? (
-              <tr>
-                <td colSpan="7" style={{ textAlign: 'center', padding: '2rem', color: 'var(--text-secondary)' }}>
-                  No student records matched this report specification.
-                </td>
+        <div className="data-table-container">
+          <table style={{ width: '100%', borderCollapse: 'collapse', fontSize: '0.8125rem' }}>
+            <thead>
+              <tr style={{ backgroundColor: '#F8FAFC', borderBottom: '1px solid var(--border-color)' }}>
+                <th style={{ padding: '0.6rem', textAlign: 'left' }}>Matric No</th>
+                <th style={{ padding: '0.6rem', textAlign: 'left' }}>Student Name</th>
+                <th style={{ padding: '0.6rem', textAlign: 'center' }}>Level</th>
+                <th style={{ padding: '0.6rem', textAlign: 'center' }}>GPA</th>
+                <th style={{ padding: '0.6rem', textAlign: 'center' }}>Fails</th>
+                <th style={{ padding: '0.6rem', textAlign: 'left' }}>Academic Standing</th>
+                <th style={{ padding: '0.6rem', textAlign: 'left' }}>Diagnosis / Reason</th>
               </tr>
-            ) : (
-              reportData.map((row, idx) => (
-                <tr key={idx} style={{ borderBottom: '1px solid #F1F5F9' }}>
-                  <td style={{ padding: '0.55rem', fontFamily: 'monospace', fontWeight: 700 }}>{row.matric_no}</td>
-                  <td style={{ padding: '0.55rem', fontWeight: 600 }}>{row.name}</td>
-                  <td style={{ padding: '0.55rem', textAlign: 'center' }}>{row.level}L</td>
-                  <td style={{ padding: '0.55rem', textAlign: 'center', fontWeight: 800 }}>
-                    {row.gpa !== null ? row.gpa.toFixed(2) : '—'}
-                  </td>
-                  <td style={{ padding: '0.55rem', textAlign: 'center', fontWeight: 600 }}>{row.failed_courses}</td>
-                  <td style={{ padding: '0.55rem', fontWeight: 700 }}>
-                    <span style={{ color: row.standing === 'Good Standing' ? '#16A34A' : row.standing === 'At Risk' ? '#D97706' : '#DC2626' }}>
-                      {row.standing}
-                    </span>
-                  </td>
-                  <td style={{ padding: '0.55rem', color: 'var(--text-secondary)' }}>
-                    {row.reasons.join('; ')}
+            </thead>
+            <tbody>
+              {reportData.length === 0 ? (
+                <tr>
+                  <td colSpan="7" style={{ textAlign: 'center', padding: '2rem', color: 'var(--text-secondary)' }}>
+                    No student records matched this report specification.
                   </td>
                 </tr>
-              ))
-            )}
-          </tbody>
-        </table>
+              ) : (
+                reportData.map((row, idx) => (
+                  <tr key={idx} style={{ borderBottom: '1px solid #F1F5F9' }}>
+                    <td style={{ padding: '0.55rem', fontFamily: 'monospace', fontWeight: 700 }}>{row.matric_no}</td>
+                    <td style={{ padding: '0.55rem', fontWeight: 600 }}>{row.name}</td>
+                    <td style={{ padding: '0.55rem', textAlign: 'center' }}>{row.level}L</td>
+                    <td style={{ padding: '0.55rem', textAlign: 'center', fontWeight: 800 }}>
+                      {row.gpa !== null ? row.gpa.toFixed(2) : '—'}
+                    </td>
+                    <td style={{ padding: '0.55rem', textAlign: 'center', fontWeight: 600 }}>{row.failed_courses}</td>
+                    <td style={{ padding: '0.55rem', fontWeight: 700 }}>
+                      <span style={{ color: row.standing === 'Good Standing' ? '#16A34A' : row.standing === 'At Risk' ? '#D97706' : '#DC2626' }}>
+                        {row.standing}
+                      </span>
+                    </td>
+                    <td style={{ padding: '0.55rem', color: 'var(--text-secondary)' }}>
+                      {row.reasons.join('; ')}
+                    </td>
+                  </tr>
+                ))
+              )}
+            </tbody>
+          </table>
+        </div>
 
         {/* Institutional Sign-off Footer */}
         <div
@@ -323,6 +326,8 @@ export const Reports = () => {
             borderTop: '1px solid var(--border-color)',
             display: 'flex',
             justifyContent: 'space-between',
+            flexWrap: 'wrap',
+            gap: '1.5rem',
             fontSize: '0.75rem',
             color: 'var(--text-secondary)',
           }}

@@ -63,6 +63,7 @@ export const UserManagement = () => {
     <div style={{ display: 'flex', flexDirection: 'column', gap: '1.25rem' }}>
       {/* Top Banner */}
       <div
+        className="action-header-stack"
         style={{
           display: 'flex',
           alignItems: 'center',

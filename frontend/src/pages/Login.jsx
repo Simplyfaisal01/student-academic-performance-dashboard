@@ -167,6 +167,7 @@ export const Login = () => {
 
       {/* Right Panel: Split Login Form */}
       <div
+        className="login-right-panel"
         style={{
           flex: '1 1 55%',
           backgroundColor: '#FFFFFF',

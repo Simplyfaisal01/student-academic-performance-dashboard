@@ -70,7 +70,7 @@ export const Settings = () => {
   };
 
   return (
-    <div style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem', maxWidth: '900px' }}>
+    <div style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem', maxWidth: '900px', width: '100%' }}>
       {/* Page Header */}
       <div>
         <h2 style={{ fontSize: '1.25rem', fontWeight: 800, color: 'var(--text-primary)' }}>
@@ -90,7 +90,7 @@ export const Settings = () => {
           </div>
         </div>
 
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))', gap: '1rem' }}>
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 200px), 1fr))', gap: '1rem' }}>
           {semesters.map((s) => (
             <div
               key={s.semester_id}
@@ -145,7 +145,7 @@ export const Settings = () => {
         )}
 
         <form onSubmit={handleSaveThresholds}>
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))', gap: '1rem' }}>
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 200px), 1fr))', gap: '1rem' }}>
             <div className="form-group">
               <label className="form-label">Probation GPA Threshold (&lt; triggers)</label>
               <input
@@ -202,8 +202,8 @@ export const Settings = () => {
             </div>
           </div>
 
-          <div style={{ display: 'flex', justifyContent: 'flex-end', marginTop: '1rem' }}>
-            <button type="submit" className="btn btn-primary">
+          <div style={{ display: 'flex', justifyContent: 'flex-end', marginTop: '1rem', flexWrap: 'wrap' }}>
+            <button type="submit" className="btn btn-primary" style={{ minWidth: '160px' }}>
               Update Rules & Recalculate
             </button>
           </div>
@@ -235,7 +235,7 @@ export const Settings = () => {
         )}
 
         <form onSubmit={handleChangePassword}>
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))', gap: '1rem' }}>
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 200px), 1fr))', gap: '1rem' }}>
             <div className="form-group">
               <label className="form-label">Current Password</label>
               <input
@@ -267,8 +267,8 @@ export const Settings = () => {
             </div>
           </div>
 
-          <div style={{ display: 'flex', justifyContent: 'flex-end', marginTop: '0.5rem' }}>
-            <button type="submit" className="btn btn-secondary">
+          <div style={{ display: 'flex', justifyContent: 'flex-end', marginTop: '0.5rem', flexWrap: 'wrap' }}>
+            <button type="submit" className="btn btn-secondary" style={{ minWidth: '150px' }}>
               Update Password
             </button>
           </div>

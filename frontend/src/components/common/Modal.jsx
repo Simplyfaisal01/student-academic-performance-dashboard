@@ -1,7 +1,19 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { X } from 'lucide-react';
 
 export const Modal = ({ isOpen, onClose, title, children, maxWidth = '650px' }) => {
+  // Lock body scroll when modal is open
+  useEffect(() => {
+    if (isOpen) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = '';
+    }
+    return () => {
+      document.body.style.overflow = '';
+    };
+  }, [isOpen]);
+
   if (!isOpen) return null;
 
   return (
@@ -18,7 +30,7 @@ export const Modal = ({ isOpen, onClose, title, children, maxWidth = '650px' }) 
         alignItems: 'center',
         justifyContent: 'center',
         zIndex: 9999,
-        padding: '1rem',
+        padding: '0.75rem',
       }}
       onClick={onClose}
     >
@@ -29,7 +41,7 @@ export const Modal = ({ isOpen, onClose, title, children, maxWidth = '650px' }) 
           boxShadow: 'var(--shadow-lg)',
           width: '100%',
           maxWidth,
-          maxHeight: '90vh',
+          maxHeight: '92vh',
           display: 'flex',
           flexDirection: 'column',
           overflow: 'hidden',
@@ -39,32 +51,37 @@ export const Modal = ({ isOpen, onClose, title, children, maxWidth = '650px' }) 
       >
         <div
           style={{
-            padding: '1rem 1.25rem',
+            padding: '0.9rem 1.15rem',
             borderBottom: '1px solid var(--border-color)',
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'space-between',
+            gap: '0.5rem',
           }}
         >
-          <h3 style={{ fontSize: '1.05rem', fontWeight: 700, color: 'var(--text-primary)' }}>
+          <h3 style={{ fontSize: '1.05rem', fontWeight: 700, color: 'var(--text-primary)', margin: 0, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
             {title}
           </h3>
           <button
             onClick={onClose}
+            aria-label="Close modal"
             style={{
               background: 'none',
               border: 'none',
               cursor: 'pointer',
               color: 'var(--text-secondary)',
-              padding: '0.25rem',
+              padding: '0.35rem',
               display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
               borderRadius: '4px',
+              flexShrink: 0,
             }}
           >
-            <X size={18} />
+            <X size={19} />
           </button>
         </div>
-        <div style={{ padding: '1.25rem', overflowY: 'auto' }}>
+        <div style={{ padding: '1.15rem', overflowY: 'auto', WebkitOverflowScrolling: 'touch' }}>
           {children}
         </div>
       </div>
@@ -73,4 +90,3 @@ export const Modal = ({ isOpen, onClose, title, children, maxWidth = '650px' }) 
 };
 
 export default Modal;
-

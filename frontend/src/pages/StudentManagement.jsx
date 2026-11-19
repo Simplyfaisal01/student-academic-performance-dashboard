@@ -122,6 +122,7 @@ export const StudentManagement = () => {
     <div style={{ display: 'flex', flexDirection: 'column', gap: '1.25rem' }}>
       {/* Top Action Header */}
       <div
+        className="action-header-stack"
         style={{
           display: 'flex',
           alignItems: 'center',
@@ -142,6 +143,7 @@ export const StudentManagement = () => {
         {isAdmin && (
           <button
             className="btn btn-primary"
+            style={{ flexShrink: 0 }}
             onClick={() => {
               setEditingStudent({});
               setFormData({ matric_no: '', name: '', level: 100, email: '', advisor_id: 'U002' });
@@ -160,12 +162,12 @@ export const StudentManagement = () => {
           padding: '1rem',
           display: 'flex',
           alignItems: 'center',
-          gap: '1rem',
+          gap: '0.75rem',
           flexWrap: 'wrap',
         }}
       >
         {/* Search */}
-        <div style={{ flex: '1 1 240px', position: 'relative' }}>
+        <div style={{ flex: '1 1 240px', position: 'relative', minWidth: '180px' }}>
           <Search
             size={16}
             color="var(--text-muted)"
@@ -182,13 +184,13 @@ export const StudentManagement = () => {
         </div>
 
         {/* Level Filter */}
-        <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
-          <span style={{ fontSize: '0.8125rem', fontWeight: 600, color: 'var(--text-secondary)' }}>
+        <div style={{ display: 'flex', alignItems: 'center', gap: '0.4rem', flex: '0 1 auto' }}>
+          <span style={{ fontSize: '0.8125rem', fontWeight: 600, color: 'var(--text-secondary)', whiteSpace: 'nowrap' }}>
             Level:
           </span>
           <select
             className="form-control"
-            style={{ width: 'auto' }}
+            style={{ width: 'auto', minWidth: '110px' }}
             value={levelFilter}
             onChange={(e) => setLevelFilter(e.target.value)}
           >
@@ -201,13 +203,13 @@ export const StudentManagement = () => {
         </div>
 
         {/* Standing Filter */}
-        <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
-          <span style={{ fontSize: '0.8125rem', fontWeight: 600, color: 'var(--text-secondary)' }}>
+        <div style={{ display: 'flex', alignItems: 'center', gap: '0.4rem', flex: '0 1 auto' }}>
+          <span style={{ fontSize: '0.8125rem', fontWeight: 600, color: 'var(--text-secondary)', whiteSpace: 'nowrap' }}>
             Standing:
           </span>
           <select
             className="form-control"
-            style={{ width: 'auto' }}
+            style={{ width: 'auto', minWidth: '130px' }}
             value={standingFilter}
             onChange={(e) => setStandingFilter(e.target.value)}
           >
@@ -316,7 +318,7 @@ export const StudentManagement = () => {
             <div
               style={{
                 display: 'grid',
-                gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))',
+                gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 180px), 1fr))',
                 gap: '1rem',
                 backgroundColor: '#F8FAFC',
                 padding: '1rem',
@@ -385,37 +387,39 @@ export const StudentManagement = () => {
                       </div>
 
                       {/* Course breakdown for this semester */}
-                      <table style={{ width: '100%', fontSize: '0.8125rem', borderCollapse: 'collapse' }}>
-                        <thead>
-                          <tr style={{ color: 'var(--text-secondary)', borderBottom: '1px solid #F1F5F9' }}>
-                            <th style={{ textAlign: 'left', padding: '0.35rem 0' }}>Course</th>
-                            <th style={{ textAlign: 'center', padding: '0.35rem 0' }}>Units</th>
-                            <th style={{ textAlign: 'center', padding: '0.35rem 0' }}>Score</th>
-                            <th style={{ textAlign: 'center', padding: '0.35rem 0' }}>Grade</th>
-                          </tr>
-                        </thead>
-                        <tbody>
-                          {hist.enrollments?.map((e) => (
-                            <tr key={e.enrollment_id} style={{ borderBottom: '1px solid #F8FAFC' }}>
-                              <td style={{ padding: '0.35rem 0', fontWeight: 600 }}>
-                                {e.course_code} - {e.course_title}
-                              </td>
-                              <td style={{ textAlign: 'center', padding: '0.35rem 0' }}>{e.credit_units}</td>
-                              <td style={{ textAlign: 'center', padding: '0.35rem 0', fontWeight: 700 }}>{e.score}</td>
-                              <td
-                                style={{
-                                  textAlign: 'center',
-                                  padding: '0.35rem 0',
-                                  fontWeight: 800,
-                                  color: e.grade === 'F' ? '#DC2626' : 'var(--text-primary)',
-                                }}
-                              >
-                                {e.grade}
-                              </td>
+                      <div className="data-table-container">
+                        <table style={{ width: '100%', fontSize: '0.8125rem', borderCollapse: 'collapse' }}>
+                          <thead>
+                            <tr style={{ color: 'var(--text-secondary)', borderBottom: '1px solid #F1F5F9' }}>
+                              <th style={{ textAlign: 'left', padding: '0.35rem 0' }}>Course</th>
+                              <th style={{ textAlign: 'center', padding: '0.35rem 0' }}>Units</th>
+                              <th style={{ textAlign: 'center', padding: '0.35rem 0' }}>Score</th>
+                              <th style={{ textAlign: 'center', padding: '0.35rem 0' }}>Grade</th>
                             </tr>
-                          ))}
-                        </tbody>
-                      </table>
+                          </thead>
+                          <tbody>
+                            {hist.enrollments?.map((e) => (
+                              <tr key={e.enrollment_id} style={{ borderBottom: '1px solid #F8FAFC' }}>
+                                <td style={{ padding: '0.35rem 0', fontWeight: 600 }}>
+                                  {e.course_code} - {e.course_title}
+                                </td>
+                                <td style={{ textAlign: 'center', padding: '0.35rem 0' }}>{e.credit_units}</td>
+                                <td style={{ textAlign: 'center', padding: '0.35rem 0', fontWeight: 700 }}>{e.score}</td>
+                                <td
+                                  style={{
+                                    textAlign: 'center',
+                                    padding: '0.35rem 0',
+                                    fontWeight: 800,
+                                    color: e.grade === 'F' ? '#DC2626' : 'var(--text-primary)',
+                                  }}
+                                >
+                                  {e.grade}
+                                </td>
+                              </tr>
+                            ))}
+                          </tbody>
+                        </table>
+                      </div>
                     </div>
                   ))}
                 </div>
@@ -456,7 +460,7 @@ export const StudentManagement = () => {
             />
           </div>
 
-          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1rem' }}>
+          <div className="grid-form-2">
             <div className="form-group">
               <label className="form-label">Level</label>
               <select

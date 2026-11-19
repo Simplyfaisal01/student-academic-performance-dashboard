@@ -208,6 +208,7 @@ export const AcademicRecords = () => {
     <div style={{ display: 'flex', flexDirection: 'column', gap: '1.25rem' }}>
       {/* Header & Controls */}
       <div
+        className="action-header-stack"
         style={{
           display: 'flex',
           alignItems: 'center',
@@ -225,7 +226,7 @@ export const AcademicRecords = () => {
           </p>
         </div>
 
-        <div style={{ display: 'flex', gap: '0.5rem' }}>
+        <div className="action-buttons-wrap">
           <button
             className="btn btn-secondary"
             onClick={handleDownloadTemplate}
@@ -251,12 +252,12 @@ export const AcademicRecords = () => {
           padding: '1rem',
           display: 'flex',
           alignItems: 'center',
-          gap: '1rem',
+          gap: '0.75rem',
           flexWrap: 'wrap',
         }}
       >
         {/* Search */}
-        <div style={{ flex: '1 1 240px', position: 'relative' }}>
+        <div style={{ flex: '1 1 240px', position: 'relative', minWidth: '180px' }}>
           <Search
             size={16}
             color="var(--text-muted)"
@@ -273,13 +274,13 @@ export const AcademicRecords = () => {
         </div>
 
         {/* Course Filter */}
-        <div style={{ display: 'flex', alignItems: 'center', gap: '0.4rem' }}>
-          <span style={{ fontSize: '0.8125rem', fontWeight: 600, color: 'var(--text-secondary)' }}>
+        <div style={{ display: 'flex', alignItems: 'center', gap: '0.4rem', flex: '0 1 auto' }}>
+          <span style={{ fontSize: '0.8125rem', fontWeight: 600, color: 'var(--text-secondary)', whiteSpace: 'nowrap' }}>
             Course:
           </span>
           <select
             className="form-control"
-            style={{ width: 'auto', maxWidth: '200px' }}
+            style={{ width: 'auto', minWidth: '130px', maxWidth: '200px' }}
             value={courseFilter}
             onChange={(e) => setCourseFilter(e.target.value)}
           >
@@ -293,13 +294,13 @@ export const AcademicRecords = () => {
         </div>
 
         {/* Grade Filter */}
-        <div style={{ display: 'flex', alignItems: 'center', gap: '0.4rem' }}>
-          <span style={{ fontSize: '0.8125rem', fontWeight: 600, color: 'var(--text-secondary)' }}>
+        <div style={{ display: 'flex', alignItems: 'center', gap: '0.4rem', flex: '0 1 auto' }}>
+          <span style={{ fontSize: '0.8125rem', fontWeight: 600, color: 'var(--text-secondary)', whiteSpace: 'nowrap' }}>
             Grade:
           </span>
           <select
             className="form-control"
-            style={{ width: 'auto' }}
+            style={{ width: 'auto', minWidth: '110px' }}
             value={gradeFilter}
             onChange={(e) => setGradeFilter(e.target.value)}
           >
@@ -386,7 +387,7 @@ export const AcademicRecords = () => {
       >
         <div style={{ display: 'flex', flexDirection: 'column', gap: '1.25rem' }}>
           {/* Target Course & Semester */}
-          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1rem' }}>
+          <div className="grid-form-2">
             <div className="form-group">
               <label className="form-label">Target Course</label>
               <select

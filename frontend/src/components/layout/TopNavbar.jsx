@@ -31,6 +31,7 @@ export const TopNavbar = ({ onToggleSidebar, title }) => {
 
   return (
     <header
+      className="top-navbar-header"
       style={{
         height: '64px',
         backgroundColor: '#FFFFFF',
@@ -42,36 +43,54 @@ export const TopNavbar = ({ onToggleSidebar, title }) => {
         position: 'sticky',
         top: 0,
         zIndex: 40,
+        gap: '0.5rem',
       }}
     >
       {/* Left: Mobile hamburger & Page Title */}
-      <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
+      <div style={{ display: 'flex', alignItems: 'center', gap: '0.65rem', minWidth: 0, flex: '1 1 auto' }}>
         <button
           onClick={onToggleSidebar}
-          style={{
-            display: 'none',
-            background: 'none',
-            border: 'none',
-            color: 'var(--text-primary)',
-            cursor: 'pointer',
-          }}
           className="mobile-menu-btn"
+          aria-label="Toggle navigation drawer"
         >
           <Menu size={22} />
         </button>
-        <h1 style={{ fontSize: '1.25rem', fontWeight: 800, color: 'var(--text-primary)', margin: 0 }}>
+        <h1
+          className="page-title-text"
+          style={{
+            fontSize: '1.25rem',
+            fontWeight: 800,
+            color: 'var(--text-primary)',
+            margin: 0,
+            whiteSpace: 'nowrap',
+            overflow: 'hidden',
+            textOverflow: 'ellipsis',
+          }}
+        >
           {title || 'Dashboard'}
         </h1>
       </div>
 
       {/* Right Controls */}
-      <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
+      <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', flexShrink: 0 }}>
         {/* Semester / Session Selector */}
-        <div style={{ display: 'flex', alignItems: 'center', gap: '0.4rem', backgroundColor: '#F8FAFC', padding: '0.35rem 0.65rem', borderRadius: 'var(--radius-sm)', border: '1px solid var(--border-color)' }}>
-          <Calendar size={15} color="var(--primary-green)" />
+        <div
+          style={{
+            display: 'flex',
+            alignItems: 'center',
+            gap: '0.35rem',
+            backgroundColor: '#F8FAFC',
+            padding: '0.35rem 0.55rem',
+            borderRadius: 'var(--radius-sm)',
+            border: '1px solid var(--border-color)',
+            maxWidth: '180px',
+          }}
+        >
+          <Calendar size={15} color="var(--primary-green)" style={{ flexShrink: 0 }} />
           <select
             value={selectedSemesterId}
             onChange={(e) => setSelectedSemesterId(Number(e.target.value))}
+            className="semester-select-text"
             style={{
               background: 'transparent',
               border: 'none',
@@ -80,6 +99,10 @@ export const TopNavbar = ({ onToggleSidebar, title }) => {
               color: 'var(--text-primary)',
               cursor: 'pointer',
               outline: 'none',
+              maxWidth: '145px',
+              overflow: 'hidden',
+              textOverflow: 'ellipsis',
+              whiteSpace: 'nowrap',
             }}
           >
             {semesters.map((sem) => (
@@ -97,6 +120,7 @@ export const TopNavbar = ({ onToggleSidebar, title }) => {
               setShowNotificationMenu(!showNotificationMenu);
               setShowProfileMenu(false);
             }}
+            aria-label="Notifications"
             style={{
               position: 'relative',
               background: '#F8FAFC',
@@ -109,6 +133,7 @@ export const TopNavbar = ({ onToggleSidebar, title }) => {
               justifyContent: 'center',
               cursor: 'pointer',
               color: 'var(--text-secondary)',
+              flexShrink: 0,
             }}
           >
             <Bell size={18} />
@@ -137,11 +162,13 @@ export const TopNavbar = ({ onToggleSidebar, title }) => {
 
           {showNotificationMenu && (
             <div
+              className="dropdown-responsive-menu"
               style={{
                 position: 'absolute',
                 right: 0,
                 top: '48px',
                 width: '340px',
+                maxWidth: 'calc(100vw - 1.5rem)',
                 backgroundColor: '#FFFFFF',
                 borderRadius: 'var(--radius-md)',
                 boxShadow: 'var(--shadow-lg)',
@@ -206,15 +233,17 @@ export const TopNavbar = ({ onToggleSidebar, title }) => {
               setShowProfileMenu(!showProfileMenu);
               setShowNotificationMenu(false);
             }}
+            aria-label="User profile menu"
             style={{
               display: 'flex',
               alignItems: 'center',
-              gap: '0.65rem',
+              gap: '0.5rem',
               background: '#F8FAFC',
               border: '1px solid var(--border-color)',
-              padding: '0.35rem 0.75rem',
+              padding: '0.35rem 0.55rem',
               borderRadius: 'var(--radius-sm)',
               cursor: 'pointer',
+              flexShrink: 0,
             }}
           >
             <div
@@ -229,28 +258,23 @@ export const TopNavbar = ({ onToggleSidebar, title }) => {
                 justifyContent: 'center',
                 fontWeight: 700,
                 fontSize: '0.8125rem',
+                flexShrink: 0,
               }}
             >
               {user?.name?.charAt(0) || 'U'}
-            </div>
-            <div style={{ textAlign: 'left', display: 'none' }} className="user-text-md">
-              <div style={{ fontSize: '0.8125rem', fontWeight: 700, color: 'var(--text-primary)', lineHeight: 1.2 }}>
-                {user?.name || 'Staff User'}
-              </div>
-              <div style={{ fontSize: '0.6875rem', color: 'var(--text-secondary)', textTransform: 'capitalize' }}>
-                {user?.role}
-              </div>
             </div>
             <ChevronDown size={14} color="var(--text-secondary)" />
           </button>
 
           {showProfileMenu && (
             <div
+              className="profile-dropdown-menu"
               style={{
                 position: 'absolute',
                 right: 0,
                 top: '48px',
                 width: '240px',
+                maxWidth: 'calc(100vw - 1.5rem)',
                 backgroundColor: '#FFFFFF',
                 borderRadius: 'var(--radius-md)',
                 boxShadow: 'var(--shadow-lg)',
@@ -261,7 +285,9 @@ export const TopNavbar = ({ onToggleSidebar, title }) => {
             >
               <div style={{ padding: '0.5rem', borderBottom: '1px solid var(--border-color)' }}>
                 <div style={{ fontWeight: 700, fontSize: '0.875rem' }}>{user?.name}</div>
-                <div style={{ fontSize: '0.75rem', color: 'var(--text-secondary)' }}>{user?.email}</div>
+                <div style={{ fontSize: '0.75rem', color: 'var(--text-secondary)', overflow: 'hidden', textOverflow: 'ellipsis' }}>
+                  {user?.email}
+                </div>
                 <span
                   style={{
                     display: 'inline-block',
@@ -345,4 +371,3 @@ export const TopNavbar = ({ onToggleSidebar, title }) => {
 };
 
 export default TopNavbar;
-

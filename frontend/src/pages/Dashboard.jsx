@@ -172,14 +172,11 @@ export const Dashboard = () => {
     .slice(0, 6);
 
   return (
-    <div style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
+    <div style={{ display: 'flex', flexDirection: 'column', gap: '1.25rem', width: '100%', minWidth: 0 }}>
       {/* Top Banner / Welcome Info */}
       <div
+        className="card action-header-stack"
         style={{
-          backgroundColor: '#FFFFFF',
-          borderRadius: 'var(--radius-md)',
-          padding: '1.25rem 1.5rem',
-          border: '1px solid var(--border-color)',
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'space-between',
@@ -195,7 +192,7 @@ export const Dashboard = () => {
             Real-time evaluation based on 143 students, 40 courses, and 2,460 recorded enrollments.
           </p>
         </div>
-        <div style={{ display: 'flex', gap: '0.5rem' }}>
+        <div className="action-buttons-wrap">
           <Link to="/probation" className="btn btn-primary" style={{ fontSize: '0.8125rem' }}>
             <AlertOctagon size={15} />
             Review Flagged Students ({summaryMetrics.onProbation})
@@ -208,7 +205,7 @@ export const Dashboard = () => {
       </div>
 
       {/* 4 Core Statistics Cards */}
-      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))', gap: '1rem' }}>
+      <div className="grid-stat-cards">
         <StatCard
           title="TOTAL ENROLLED STUDENTS"
           value={summaryMetrics.totalStudents}
@@ -240,45 +237,45 @@ export const Dashboard = () => {
       </div>
 
       {/* 3 Main Visual Charts */}
-      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))', gap: '1rem' }}>
+      <div className="grid-charts-3">
         {/* Chart 1: Standing Distribution */}
-        <div className="card" style={{ height: '340px', display: 'flex', flexDirection: 'column' }}>
+        <div className="card chart-card-box" style={{ height: '340px', display: 'flex', flexDirection: 'column', minWidth: 0 }}>
           <div className="card-header">
             <span className="card-title">Academic Standing Distribution</span>
             <span style={{ fontSize: '0.75rem', color: 'var(--text-secondary)' }}>Active Semester</span>
           </div>
-          <div style={{ flex: 1, position: 'relative' }}>
+          <div style={{ flex: 1, position: 'relative', minHeight: 0 }}>
             <Doughnut data={standingData} options={standingOptions} />
           </div>
         </div>
 
         {/* Chart 2: Performance by Level */}
-        <div className="card" style={{ height: '340px', display: 'flex', flexDirection: 'column' }}>
+        <div className="card chart-card-box" style={{ height: '340px', display: 'flex', flexDirection: 'column', minWidth: 0 }}>
           <div className="card-header">
             <span className="card-title">Average GPA by Level</span>
             <span style={{ fontSize: '0.75rem', color: 'var(--text-secondary)' }}>5.0 Point Scale</span>
           </div>
-          <div style={{ flex: 1, position: 'relative' }}>
+          <div style={{ flex: 1, position: 'relative', minHeight: 0 }}>
             <Bar data={performanceData} options={performanceOptions} />
           </div>
         </div>
 
         {/* Chart 3: Probation Trends */}
-        <div className="card" style={{ height: '340px', display: 'flex', flexDirection: 'column' }}>
+        <div className="card chart-card-box" style={{ height: '340px', display: 'flex', flexDirection: 'column', minWidth: 0 }}>
           <div className="card-header">
             <span className="card-title">Probation Trends</span>
             <span style={{ fontSize: '0.75rem', color: 'var(--text-secondary)' }}>Semester-on-Semester</span>
           </div>
-          <div style={{ flex: 1, position: 'relative' }}>
+          <div style={{ flex: 1, position: 'relative', minHeight: 0 }}>
             <Line data={probationTrendData} options={trendOptions} />
           </div>
         </div>
       </div>
 
       {/* Lower Grid: Recent Probation Alerts & Academic Activities */}
-      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(400px, 1fr))', gap: '1rem' }}>
+      <div className="grid-lower-2">
         {/* Recent Probation Alerts */}
-        <div className="card">
+        <div className="card" style={{ minWidth: 0 }}>
           <div className="card-header">
             <div>
               <div className="card-title">Recent Probation Flags</div>
@@ -307,9 +304,11 @@ export const Dashboard = () => {
                     display: 'flex',
                     alignItems: 'center',
                     justifyContent: 'space-between',
+                    flexWrap: 'wrap',
+                    gap: '0.5rem',
                   }}
                 >
-                  <div>
+                  <div style={{ minWidth: 0, flex: '1 1 auto' }}>
                     <div style={{ fontWeight: 700, fontSize: '0.875rem', color: 'var(--text-primary)' }}>
                       {st.name}
                     </div>
@@ -328,7 +327,7 @@ export const Dashboard = () => {
         </div>
 
         {/* Academic Governance & System Summary */}
-        <div className="card">
+        <div className="card" style={{ minWidth: 0 }}>
           <div className="card-header">
             <span className="card-title">Governance & Decision Log</span>
             <span style={{ fontSize: '0.75rem', color: 'var(--text-secondary)' }}>Workflow Actions</span>
@@ -338,7 +337,7 @@ export const Dashboard = () => {
               <div style={{ width: 32, height: 32, borderRadius: '6px', backgroundColor: '#E8FBF5', color: '#087B5B', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
                 <Clock size={16} />
               </div>
-              <div style={{ fontSize: '0.8125rem' }}>
+              <div style={{ fontSize: '0.8125rem', minWidth: 0 }}>
                 <div style={{ fontWeight: 600, color: 'var(--text-primary)' }}>
                   Automated Engine Verification Complete
                 </div>
@@ -352,7 +351,7 @@ export const Dashboard = () => {
               <div style={{ width: 32, height: 32, borderRadius: '6px', backgroundColor: '#FEF3C7', color: '#D97706', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
                 <AlertTriangle size={16} />
               </div>
-              <div style={{ fontSize: '0.8125rem' }}>
+              <div style={{ fontSize: '0.8125rem', minWidth: 0 }}>
                 <div style={{ fontWeight: 600, color: 'var(--text-primary)' }}>
                   Academic Advisor Alerts Dispatched
                 </div>
@@ -366,7 +365,7 @@ export const Dashboard = () => {
               <div style={{ width: 32, height: 32, borderRadius: '6px', backgroundColor: '#EDF2F9', color: '#142B4A', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
                 <TrendingUp size={16} />
               </div>
-              <div style={{ fontSize: '0.8125rem' }}>
+              <div style={{ fontSize: '0.8125rem', minWidth: 0 }}>
                 <div style={{ fontWeight: 600, color: 'var(--text-primary)' }}>
                   Probation Committee Panel Active
                 </div>

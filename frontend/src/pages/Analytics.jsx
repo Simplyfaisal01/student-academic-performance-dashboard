@@ -208,6 +208,7 @@ export const Analytics = () => {
     <div style={{ display: 'flex', flexDirection: 'column', gap: '1.25rem' }}>
       {/* Header */}
       <div
+        className="action-header-stack"
         style={{
           display: 'flex',
           alignItems: 'center',
@@ -226,7 +227,7 @@ export const Analytics = () => {
         </div>
 
         {/* Tab switcher */}
-        <div style={{ display: 'flex', backgroundColor: '#FFFFFF', padding: '0.25rem', borderRadius: 'var(--radius-sm)', border: '1px solid var(--border-color)' }}>
+        <div style={{ display: 'flex', backgroundColor: '#FFFFFF', padding: '0.25rem', borderRadius: 'var(--radius-sm)', border: '1px solid var(--border-color)', flexWrap: 'wrap', gap: '0.25rem' }}>
           <button
             onClick={() => setActiveTab('overview')}
             style={{
@@ -238,6 +239,7 @@ export const Analytics = () => {
               cursor: 'pointer',
               backgroundColor: activeTab === 'overview' ? 'var(--primary-green)' : 'transparent',
               color: activeTab === 'overview' ? '#FFFFFF' : 'var(--text-secondary)',
+              flex: '1 1 auto',
             }}
           >
             Overview & Levels
@@ -253,6 +255,7 @@ export const Analytics = () => {
               cursor: 'pointer',
               backgroundColor: activeTab === 'trends' ? 'var(--primary-green)' : 'transparent',
               color: activeTab === 'trends' ? '#FFFFFF' : 'var(--text-secondary)',
+              flex: '1 1 auto',
             }}
           >
             Historical Trends
@@ -261,25 +264,25 @@ export const Analytics = () => {
       </div>
 
       {activeTab === 'overview' ? (
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(360px, 1fr))', gap: '1rem' }}>
+        <div className="grid-lower-2" style={{ width: '100%' }}>
           {/* Chart 1: Standing Distribution */}
-          <div className="card" style={{ height: '360px', display: 'flex', flexDirection: 'column' }}>
+          <div className="card chart-card-box" style={{ height: '360px', display: 'flex', flexDirection: 'column', minWidth: 0 }}>
             <div className="card-header">
               <span className="card-title">Academic Standing Distribution</span>
               <span style={{ fontSize: '0.75rem', color: 'var(--text-secondary)' }}>Active Semester</span>
             </div>
-            <div style={{ flex: 1, position: 'relative' }}>
+            <div style={{ flex: 1, position: 'relative', minHeight: 0 }}>
               <Doughnut data={standingChartData} options={{ responsive: true, maintainAspectRatio: false, cutout: '65%' }} />
             </div>
           </div>
 
           {/* Chart 2: Level-by-Level Comparison */}
-          <div className="card" style={{ height: '360px', display: 'flex', flexDirection: 'column' }}>
+          <div className="card chart-card-box" style={{ height: '360px', display: 'flex', flexDirection: 'column', minWidth: 0 }}>
             <div className="card-header">
               <span className="card-title">Performance by Academic Level</span>
               <span style={{ fontSize: '0.75rem', color: 'var(--text-secondary)' }}>Good Standing vs Flagged</span>
             </div>
-            <div style={{ flex: 1, position: 'relative' }}>
+            <div style={{ flex: 1, position: 'relative', minHeight: 0 }}>
               <Bar
                 data={levelComparisonData}
                 options={{
@@ -292,7 +295,7 @@ export const Analytics = () => {
           </div>
 
           {/* Chart 3: Top Failing Courses */}
-          <div className="card" style={{ height: '360px', display: 'flex', flexDirection: 'column', gridColumn: 'span 2' }}>
+          <div className="card chart-card-box" style={{ height: '360px', display: 'flex', flexDirection: 'column', minWidth: 0, gridColumn: '1 / -1' }}>
             <div className="card-header">
               <div>
                 <div className="card-title">Top High-Deficiency Courses (Most Fails)</div>
@@ -301,7 +304,7 @@ export const Analytics = () => {
                 </div>
               </div>
             </div>
-            <div style={{ flex: 1, position: 'relative' }}>
+            <div style={{ flex: 1, position: 'relative', minHeight: 0 }}>
               <Bar
                 data={topFailedChartData}
                 options={{
@@ -315,8 +318,8 @@ export const Analytics = () => {
         </div>
       ) : (
         /* Historical Trends Tab */
-        <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
-          <div className="card" style={{ height: '420px', display: 'flex', flexDirection: 'column' }}>
+        <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem', width: '100%' }}>
+          <div className="card chart-card-box" style={{ height: '420px', display: 'flex', flexDirection: 'column', minWidth: 0 }}>
             <div className="card-header">
               <div>
                 <div className="card-title">Longitudinal Performance & Probation Trends</div>
@@ -325,7 +328,7 @@ export const Analytics = () => {
                 </div>
               </div>
             </div>
-            <div style={{ flex: 1, position: 'relative' }}>
+            <div style={{ flex: 1, position: 'relative', minHeight: 0 }}>
               <Line data={historicalTrendsData} options={trendOptions} />
             </div>
           </div>
