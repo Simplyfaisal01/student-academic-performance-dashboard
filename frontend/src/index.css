@@ -312,15 +312,11 @@ body {
   color: #FFFFFF;
   display: flex;
   flex-direction: column;
-  min-height: 100vh;
   height: 100%;
-  align-self: stretch;
-  position: sticky;
-  top: 0;
-  z-index: 50;
-  box-shadow: var(--shadow-lg);
+  min-height: 100vh;
   flex-shrink: 0;
   transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  z-index: 50;
 }
 
 .sidebar-close-btn {

@@ -32,7 +32,7 @@ export const Layout = () => {
   };
 
   return (
-    <div style={{ display: 'flex', minHeight: '100vh', backgroundColor: 'var(--bg-main)', width: '100%', maxWidth: '100vw', overflowX: 'hidden', alignItems: 'stretch' }}>
+    <div style={{ display: 'flex', height: '100vh', backgroundColor: 'var(--bg-main)', width: '100%', maxWidth: '100vw', overflow: 'hidden' }}>
       {/* Collapsible Mobile & Desktop Sidebar */}
       <Sidebar isOpen={sidebarOpen} onClose={() => setSidebarOpen(false)} />
 
@@ -42,7 +42,7 @@ export const Layout = () => {
           title={getPageTitle(location.pathname)}
           onToggleSidebar={() => setSidebarOpen(!sidebarOpen)}
         />
-        <main className="main-content-area" style={{ flex: 1, padding: '1.5rem', overflowY: 'auto', minWidth: 0, width: '100%' }}>
+        <main className="main-content-area" style={{ flex: 1, padding: '1.5rem', overflowY: 'auto', overflowX: 'hidden', minWidth: 0, width: '100%' }}>
           <Outlet />
         </main>
       </div>
